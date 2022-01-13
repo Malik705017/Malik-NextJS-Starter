@@ -1,0 +1,16 @@
+@import 'styles/mixin.scss';
+
+$height-header-desktop: 80px;
+$height-header-mobile: 50px;
+
+.header {
+  position: fixed;
+  top: 0;
+  height: $height-header-desktop;
+  width: 100%;
+  background-color: black;
+
+  @include mobile {
+    height: $height-header-mobile;
+  }
+}

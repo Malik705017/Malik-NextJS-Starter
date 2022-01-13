@@ -1,0 +1,16 @@
+@import 'components/common/molecules/Header/Header.module.scss';
+@import 'styles/mixin.scss';
+
+.layout {
+  width: 100%;
+  min-height: 100vh;
+
+  & > main {
+    padding-top: $height-header-desktop;
+    min-height: 100vh;
+
+    @include mobile {
+      padding-top: $height-header-mobile;
+    }
+  }
+}
