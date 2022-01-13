@@ -1,0 +1,36 @@
+@import 'styles/mixin.scss';
+
+.modal {
+  width: 500px;
+  height: 400px;
+  background-color: white;
+
+  position: fixed;
+  left: 50%;
+  top: 20vh;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation-name: show-modal;
+  animation-duration: 500ms;
+
+  @include mobile {
+    width: min(500px, 80%);
+  }
+}
+
+// css animation
+@keyframes show-modal {
+  from {
+    opacity: 0;
+    top: 0;
+  }
+  to {
+    opacity: 1;
+    top: 20vh;
+  }
+}
