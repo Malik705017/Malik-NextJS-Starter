@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import Image from 'next/image';
 
 import { useModal } from '../../../models/modal';
 import { useScroll } from '../../../models/scroll';
@@ -37,8 +38,8 @@ const Home: FC = () => {
     <div className={styles.home}>
       <Head title="home" description={'home'} />
       <Carousel
-        childNodes={imgList.map((src) => (
-          <img src={src} />
+        childNodes={imgList.map((src, index) => (
+          <Image key={`${src}_${index}`} src={src} alt={`banner_${index}`} layout="fill" />
         ))}
         className={styles.banner}
       />
