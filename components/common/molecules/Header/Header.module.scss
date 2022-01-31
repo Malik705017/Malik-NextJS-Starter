@@ -1,16 +1,36 @@
 @import 'styles/mixin.scss';
 
-$height-header-desktop: 80px;
-$height-header-mobile: 50px;
+$height-header-desktop: 60px;
 
 .header {
   position: fixed;
   top: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   height: $height-header-desktop;
   width: 100%;
+
   background-color: black;
+  box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  color: white;
+  margin: 0;
+  margin-left: 20px;
+  margin-right: auto;
+  font-weight: 500;
+  font-size: 30px;
 
   @include mobile {
-    height: $height-header-mobile;
+    font-size: 24px;
   }
+}
+
+.icon {
+  margin-right: 20px;
 }
