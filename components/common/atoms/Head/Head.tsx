@@ -14,7 +14,9 @@ const HeadIngecter: FC<HeadIngecterProps> = ({ title, description, og_title, og_
   return (
     <Head>
       <title>{title}</title>
+      <meta name="author" content="Malik Chang" />
       <meta name="description" content={description} />
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       {og_title && <meta property="og:title" content={og_title} />}
       {og_description && <meta property="og:description" content={og_description} />}
       {og_url && <meta property="og:url" content={og_url} />}

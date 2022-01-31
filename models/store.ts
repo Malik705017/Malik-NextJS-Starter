@@ -1,12 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 
 import modalReducer from './modal';
+import authReducer from './auth';
+import scrollReducer from './scroll';
 
+/* https://redux-toolkit.js.org/api/configureStore  */
 const store = configureStore({
   reducer: {
-    // Define a top-level state field named `todos`, handled by `todosReducer`
     modal: modalReducer,
+    auth: authReducer,
+    scroll: scrollReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
