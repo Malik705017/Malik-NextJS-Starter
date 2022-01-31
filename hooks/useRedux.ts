@@ -4,9 +4,9 @@ import type { RootState, AppDispatch } from '../models/store';
 
 export type Selector<ReturnState> = (s: RootState) => ReturnState;
 
-interface DefaultActionMap {
+export type DefaultActionMap = {
   [key: string]: (...params: any[]) => void;
-}
+};
 
 type WrapActionDispatch<ActionMap extends DefaultActionMap> = {
   [key in keyof ActionMap]: (...params: Parameters<ActionMap[key]>) => void;
@@ -23,7 +23,7 @@ export const useRedux = <ReturnState, ActionMap extends DefaultActionMap>(
   const state = useAppSelector(selector);
   const dispatch = useAppDispatch();
 
-  const boundActions = bindActionCreators(actions, dispatch) as unknown;
+  const boundActions = bindActionCreators(actions, dispatch);
 
   return [state, boundActions as WrapActionDispatch<ActionMap>];
 };
