@@ -11,11 +11,12 @@ type CarouselProps = {
 
 const Carousel: FC<CarouselProps> = ({ time = 5000, childNodes, className = '' }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
+  const len = childNodes.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlideIndex((prevIndex) => {
-        if (prevIndex === childNodes.length - 1) {
+        if (prevIndex === len - 1) {
           return 0;
         }
         return prevIndex + 1;
@@ -25,7 +26,7 @@ const Carousel: FC<CarouselProps> = ({ time = 5000, childNodes, className = '' }
     return () => {
       clearInterval(timer);
     };
-  }, [time]);
+  }, [time, len]);
 
   return (
     <div className={classnames(styles.carousel, className)}>

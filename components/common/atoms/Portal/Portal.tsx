@@ -13,7 +13,7 @@ const Portal: FC = ({ children }) => {
       document.body.removeChild(elementRef.current);
       console.log('UNMOUNT');
     };
-  }, []);
+  }, [elementRef.current]);
 
   return ReactDOM.createPortal(children, elementRef.current);
 };
