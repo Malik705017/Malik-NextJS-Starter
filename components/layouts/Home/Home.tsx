@@ -1,23 +1,68 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { useModal } from '../../../models/modal';
+import { useScroll } from '../../../models/scroll';
 
 import Head from '../../common/atoms/Head';
+import Button from '../../common/atoms/Button';
 import Modal from '../../common/molecules/Modal';
+import Auth from '../../common/molecules/Auth';
+import Carousel from '../../common/organisms/Carousel';
 
 import styles from './Home.module.scss';
 
+const imgList = ['/images/home_banner_3.png', '/images/home_banner_2.png', '/images/home_banner_1.png'];
+
 const Home: FC = () => {
-  const [{ isOpen: isModalOpen }, { openModal }] = useModal();
+  const [{ isOpen: isModalOpen }] = useModal();
+  const [{ canScroll }, { enableScroll, disableScroll }] = useScroll();
+
+  const scrollToY = () => {
+    if (window) {
+      window.scrollTo({ top: window.innerHeight - 60, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    disableScroll();
+  }, []);
+
+  useEffect(() => {
+    if (canScroll) {
+      scrollToY();
+    }
+  }, [canScroll]);
 
   return (
-    <>
+    <div className={styles.home}>
       <Head title="home" description={'home'} />
-      <div className={styles.home}>
-        <button onClick={() => openModal()}>Click!</button>
+      <Carousel
+        childNodes={imgList.map((src) => (
+          <img src={src} />
+        ))}
+        className={styles.banner}
+      />
+      <div className={styles.slogan}>
+        <h1>FIND YOUR TEAMMATE</h1>
+        <h1 className={styles.fast}>FAST</h1>
+        <Button
+          content="馬上開始"
+          reverse
+          onClick={() => {
+            enableScroll();
+            if (canScroll) {
+              scrollToY();
+            }
+          }}
+        />
       </div>
-      {isModalOpen && <Modal>This is a Modal</Modal>}
-    </>
+      <div className={styles.content} />
+      {isModalOpen && (
+        <Modal>
+          <Auth />
+        </Modal>
+      )}
+    </div>
   );
 };
 

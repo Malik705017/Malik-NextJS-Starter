@@ -1,3 +1,77 @@
+@import 'components/common/molecules/Header/Header.module.scss';
+@import 'styles/mixin.scss';
+
 .home {
-  height: 700px;
+  position: relative;
+}
+
+.banner {
+  height: calc(100vh - $height-header-desktop);
+}
+
+.slogan {
+  height: calc(100vh - $height-header-desktop);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30vh;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  & > h1 {
+    text-align: center;
+    width: 90%;
+    color: white;
+    font-size: 90px;
+    margin: 0;
+    animation: show forwards;
+    animation-duration: 2s;
+    opacity: 0;
+
+    @include mobile {
+      font-size: 60px;
+    }
+  }
+
+  & > h1.fast {
+    color: black;
+    margin-bottom: 50px;
+
+    @include mobile {
+      margin-bottom: 32px;
+    }
+
+    animation: show forwards;
+    animation-delay: 1s;
+    animation-duration: 2s;
+  }
+
+  & > button {
+    width: 200px;
+    height: 80px;
+    font-size: 24px;
+    opacity: 0;
+
+    animation: show forwards;
+    animation-delay: 2s;
+    animation-duration: 2s;
+  }
+}
+
+.content {
+  height: calc(100vh - $height-header-desktop);
+  background-color: white;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
