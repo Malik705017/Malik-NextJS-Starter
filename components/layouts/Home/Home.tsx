@@ -9,6 +9,7 @@ import Button from '../../common/atoms/Button';
 import Modal from '../../common/molecules/Modal';
 import Auth from '../../common/molecules/Auth';
 import Carousel from '../../common/organisms/Carousel';
+import Slider from '../../common/organisms/Slider';
 
 import styles from './Home.module.scss';
 
@@ -36,7 +37,7 @@ const Home: FC = () => {
 
   return (
     <div className={styles.home}>
-      <Head title="home" description={'home'} />
+      <Head title="Elsword wiki" description={'elsword information and guide'} />
       <Carousel
         childNodes={imgList.map((src, index) => (
           <Image key={`${src}_${index}`} src={src} alt={`banner_${index}`} layout="fill" />
@@ -57,7 +58,13 @@ const Home: FC = () => {
           }}
         />
       </div>
-      <div className={styles.content} />
+      <div className={styles.content}>
+        <Slider
+          childNodes={imgList.map((src, index) => (
+            <Image key={`${src}_${index}`} src={src} alt={`banner_${index}`} layout="fill" />
+          ))}
+        />
+      </div>
       {isModalOpen && (
         <Modal>
           <Auth />

@@ -70,6 +70,9 @@
 .content {
   height: calc(100vh - $height-header-desktop);
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes show {

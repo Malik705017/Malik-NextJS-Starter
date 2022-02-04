@@ -33,7 +33,7 @@ const Carousel: FC<CarouselProps> = ({ time = 5000, childNodes, className = '' }
       <ul>
         {childNodes.map((node, index) => (
           <li key={`_${index}`} className={classnames(styles.slide, activeSlideIndex === index && styles.activeSlide)}>
-            {node}
+            <div>{node}</div>
           </li>
         ))}
       </ul>
