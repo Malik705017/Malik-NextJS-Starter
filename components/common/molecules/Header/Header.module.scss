@@ -15,6 +15,7 @@ $height-header-desktop: 60px;
   width: 100%;
 
   background-color: black;
+  color: white;
   box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -25,6 +26,7 @@ $height-header-desktop: 60px;
   margin-right: auto;
   font-weight: 500;
   font-size: 30px;
+  cursor: pointer;
 
   @include mobile {
     font-size: 24px;
