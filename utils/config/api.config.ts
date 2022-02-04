@@ -1,5 +1,22 @@
-const APIKEY = process.env.NEXT_PUBLIC_AUTH_APIKEY;
-const DOMAIN = process.env.NEXT_PUBLIC_AUTH_ENDPOINT;
+/* google firebase api config */
+export const DOMAIN = process.env.AUTH_ENDPOINT;
+export const APIKEY = process.env.AUTH_APIKEY;
+
+/* google firebase api route */
+export const googleApiRoute = {
+  accounts: {
+    signUp: `${DOMAIN}/accounts:signUp?key=${APIKEY}`,
+    signIn: `${DOMAIN}/accounts:signInWithPassword?key=${APIKEY}`,
+  },
+};
+
+/* nextjs api route */
+export const apiRoute = {
+  auth: {
+    signUp: '/auth/signUp',
+    signIn: '/auth/signIn',
+  },
+};
 
 type FetchMethod = 'POST' | 'GET' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -14,7 +31,7 @@ export const wrapFetch: <Data>(
   body?: DefaultBody
 ) => Promise<Data | string> = async (route, method, body) => {
   try {
-    const response = await fetch(`${DOMAIN}/${route}?key=${APIKEY}`, {
+    const response = await fetch(`/api${route}`, {
       method: method,
       ...(method === 'POST' && { body: JSON.stringify(body) }),
       ...(method === 'POST' && { headers: { 'Content-Type': 'application/json' } }),
@@ -23,7 +40,7 @@ export const wrapFetch: <Data>(
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(result.error.message);
+      throw new Error(result.message);
     }
 
     return result;
@@ -33,7 +50,3 @@ export const wrapFetch: <Data>(
     } else return 'something went wrong';
   }
 };
-
-/* api route */
-export const SIGN_UP_ROUTE = 'accounts:signUp';
-export const SIGN_IN_ROUTE = 'accounts:signInWithPassword';
