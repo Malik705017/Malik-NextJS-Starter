@@ -47,7 +47,8 @@ const signIn = createAsyncThunk<SignInDataType | string, void, { state: RootStat
     /* signIn success */
     if (typeof data !== 'string') {
       localStorage.setItem('idToken', data.idToken);
-      localStorage.setItem('expiresIn', data.expiresIn.toString());
+      const expiredTime = new Date().getTime() + data.expiresIn * 1000;
+      localStorage.setItem('expiredTime', expiredTime.toString());
     }
 
     return data;
@@ -65,6 +66,18 @@ const authSlice = createSlice({
   reducers: {
     changeInput(state, action: PayloadAction<{ type: 'email' | 'password'; value: string }>) {
       state[action.payload.type] = action.payload.value;
+    },
+    checkIsLoggedIn(state) {
+      const token = localStorage.getItem('idToken');
+      if (token) {
+        state.isLoggedIn = true;
+      }
+    },
+    logOut(state) {
+      state.token = '';
+      state.isLoggedIn = false;
+      localStorage.removeItem('idToken');
+      localStorage.removeItem('expiredTime');
     },
   },
   extraReducers: (builder) => {
