@@ -1,4 +1,4 @@
-import { wrapFetch, SIGN_IN_ROUTE, SIGN_UP_ROUTE } from './api.config';
+import { wrapFetch, apiRoute } from '../utils/config/api.config';
 
 export type SignUpParamsType = {
   email: string;
@@ -13,10 +13,9 @@ export type SignUpDataType = {
 };
 
 export const signUp = async ({ email, password }: SignUpParamsType) => {
-  const data = await wrapFetch<SignUpDataType>(SIGN_UP_ROUTE, 'POST', {
+  const data = await wrapFetch<SignUpDataType>(apiRoute.auth.signUp, 'POST', {
     email,
     password,
-    returnSecureToken: true,
   });
 
   return data;
@@ -33,10 +32,9 @@ export type SignInDataType = {
 };
 
 export const signIn = async ({ email, password }: SignInParamsType) => {
-  const data = await wrapFetch<SignInDataType>(SIGN_IN_ROUTE, 'POST', {
+  const data = await wrapFetch<SignInDataType>(apiRoute.auth.signIn, 'POST', {
     email,
     password,
-    returnSecureToken: true,
   });
 
   return data;
