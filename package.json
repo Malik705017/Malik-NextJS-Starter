@@ -1,5 +1,5 @@
 {
-  "name": "shop-app",
+  "name": "malik-nextjs-starter",
   "private": true,
   "scripts": {
     "dev": "next dev",
