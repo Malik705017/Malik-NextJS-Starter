@@ -19,7 +19,6 @@
 
 .buttonOriginal {
   @include button(black, white);
-  border: 1px solid black;
 }
 
 .buttonOriginal:hover {
@@ -34,5 +33,4 @@
 .buttonReverse:hover {
   color: black;
   background-color: white;
-  border: 2px solid black;
 }

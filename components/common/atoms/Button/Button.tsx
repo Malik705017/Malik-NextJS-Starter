@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import classnames from 'classnames';
 
 import styles from './Button.module.scss';
 
 type ButtonProps = {
-  content: string;
+  content?: ReactNode;
   className?: string;
   reverse?: boolean;
   onClick?: () => void;
@@ -13,7 +13,7 @@ type ButtonProps = {
 const Button: FC<ButtonProps> = ({ className = '', content = '', reverse = false, onClick = () => {} }) => {
   return (
     <button
-      className={classnames(!reverse && styles.buttonOriginal, reverse && styles.buttonReverse, className)}
+      className={classnames(!reverse ? styles.buttonOriginal : styles.buttonReverse, className)}
       onClick={onClick}
     >
       {content}

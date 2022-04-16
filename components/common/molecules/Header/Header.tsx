@@ -22,7 +22,7 @@ const Header: FC = () => {
           router.push(appRoute.home);
         }}
       >
-        Elsword 組團網
+        Malik's NextJS Starter
       </h1>
       {isLoggedIn && <p>Welcome</p>}
       {!isLoggedIn && (
