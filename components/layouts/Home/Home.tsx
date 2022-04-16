@@ -8,12 +8,12 @@ import Head from '../../common/atoms/Head';
 import Button from '../../common/atoms/Button';
 import Modal from '../../common/molecules/Modal';
 import Auth from '../../common/molecules/Auth';
+import SectionWrapper from '../../common/molecules/SectionWrapper';
 import Carousel from '../../common/organisms/Carousel';
-import Slider from '../../common/organisms/Slider';
 
 import styles from './Home.module.scss';
 
-const imgList = ['/images/home_banner_3.png', '/images/home_banner_2.png', '/images/home_banner_1.png'];
+const imgList = ['/images/home/banner_3.jpg', '/images/home/banner_2.jpg', '/images/home/banner_1.jpg'];
 
 const Home: FC = () => {
   const [{ isOpen: isModalOpen }] = useModal();
@@ -21,7 +21,7 @@ const Home: FC = () => {
 
   const scrollToY = () => {
     if (window) {
-      window.scrollTo({ top: window.innerHeight - 60, behavior: 'smooth' });
+      window.scrollBy({ top: window.innerHeight - 60, behavior: 'smooth' });
     }
   };
 
@@ -36,41 +36,42 @@ const Home: FC = () => {
   }, [canScroll]);
 
   return (
-    <div className={styles.home}>
-      <Head title="Elsword wiki" description={'elsword information and guide'} />
-      <Carousel
-        childNodes={imgList.map((src, index) => (
-          <Image key={`${src}_${index}`} src={src} alt={`banner_${index}`} layout="fill" />
-        ))}
-        className={styles.banner}
-      />
-      <div className={styles.slogan}>
-        <h1>FIND YOUR TEAMMATE</h1>
-        <h1 className={styles.fast}>FAST</h1>
-        <Button
-          content="馬上開始"
-          reverse
-          onClick={() => {
-            enableScroll();
-            if (canScroll) {
-              scrollToY();
-            }
-          }}
-        />
-      </div>
-      <div className={styles.content}>
-        <Slider
+    <>
+      <Head title="Malik's NextJS Starter" description={'Make your project better'} />
+      <div className={styles.banner}>
+        <Carousel
+          className={styles.carousel}
           childNodes={imgList.map((src, index) => (
             <Image key={`${src}_${index}`} src={src} alt={`banner_${index}`} layout="fill" />
           ))}
         />
+        {/*標語，z-index = 2 */}
+        <SectionWrapper className={styles.slogan}>
+          <h1>BUILD YOUR WEBSITE</h1>
+          <h1>
+            <span>SUPER</span> FAST
+          </h1>
+          <Button
+            content="馬上開始"
+            reverse
+            onClick={() => {
+              enableScroll();
+              if (canScroll) {
+                scrollToY();
+              }
+            }}
+          />
+        </SectionWrapper>
+        {/*背景遮罩，z-index = 1 */}
+        <SectionWrapper className={styles.mask} />
       </div>
+      <SectionWrapper isFullPage></SectionWrapper>
       {isModalOpen && (
         <Modal>
           <Auth />
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 
