@@ -1,0 +1,20 @@
+@import 'styles/mixin.scss';
+@import 'components/common/molecules/Header/Header.module.scss';
+
+.sectionWrapper {
+  width: 100%;
+  padding: 60px 100px;
+
+  @include tablet {
+    padding: 40px 60px;
+  }
+
+  @include mobile {
+    padding: 20px 40px;
+  }
+}
+
+.fullpage {
+  height: calc(100vh - $height-header-desktop);
+  min-height: auto;
+}
