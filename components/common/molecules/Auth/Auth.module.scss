@@ -1,7 +1,36 @@
+@import 'styles/variables.scss';
+
 .auth {
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  width: 50%;
-  justify-content: space-evenly;
+  width: 70%;
+
+  & h2 {
+    margin-bottom: 20px;
+  }
+}
+
+.input,
+.signButton {
+  height: 36px;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+
+  & > .switchQuestion {
+    margin-right: 8px;
+  }
+
+  & > .switchAction {
+    cursor: pointer;
+
+    &:hover {
+      color: $green;
+    }
+  }
 }
