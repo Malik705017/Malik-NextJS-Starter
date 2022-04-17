@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, ActionCreatorsMapObject, PayloadAction } from '@reduxjs/toolkit';
-import { useRedux, Selector, DefaultActionMap } from '../hooks/useRedux';
-import { RootState } from './store';
-import { status } from '../utils/status';
-import { signUp as signUpFunc, signIn as signInFunc, SignUpDataType, SignInDataType } from '../apis/auth.api';
+import { useRedux, Selector, DefaultActionMap } from 'hooks/useRedux';
+import { RootState } from 'models/store';
+import { status } from 'utils/status';
+import { signUp as signUpFunc, signIn as signInFunc, SignUpDataType, SignInDataType } from 'apis/auth.api';
 
 interface AuthState {
   token: string;

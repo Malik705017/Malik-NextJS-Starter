@@ -1,13 +1,13 @@
 @import 'styles/mixin.scss';
 
 .modal {
-  width: 500px;
-  height: 400px;
+  width: 400px;
+  height: 320px;
   background-color: white;
 
   position: fixed;
   left: 50%;
-  top: 20vh;
+  top: 25vh;
   transform: translateX(-50%);
   z-index: 4;
 
@@ -15,6 +15,7 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  border-radius: 14px;
 
   animation-name: show-modal;
   animation-duration: 500ms;
@@ -32,7 +33,7 @@
   }
   to {
     opacity: 1;
-    top: 20vh;
+    top: 25vh;
   }
 }
 

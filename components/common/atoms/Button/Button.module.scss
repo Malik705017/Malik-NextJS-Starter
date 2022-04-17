@@ -1,11 +1,7 @@
+@import 'styles/variables.scss';
+
 @mixin button($color, $bg-color) {
-  all: initial;
-
-  width: 80px;
-  height: 30px;
-
   border: 0;
-  border-radius: 16px;
   padding: 10px;
   cursor: pointer;
 
@@ -18,21 +14,36 @@
 }
 
 .buttonOriginal {
-  @include button(black, white);
-  border: 1px solid black;
+  @include button($green, black);
 }
 
 .buttonOriginal:hover {
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: $green;
 }
 
 .buttonReverse {
-  @include button(white, black);
+  @include button(black, $green);
 }
 
 .buttonReverse:hover {
-  color: black;
-  background-color: white;
-  border: 2px solid black;
+  color: $green;
+  background-color: black;
+}
+
+.large {
+  height: 32px;
+  border-radius: 8px;
+}
+
+.default {
+  height: 24px;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.small {
+  height: 16px;
+  border-radius: 4px;
+  font-size: 14px;
 }

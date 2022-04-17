@@ -1,10 +1,10 @@
 import { FC, useEffect } from 'react';
 
-import { useAuth } from '../../../models/auth';
-import { useModal } from '../../../models/modal';
+import { useAuth } from 'models/auth';
+import { useModal } from 'models/modal';
 
-import Auth from '../../common/molecules/Auth';
-import Modal from '../../common/molecules/Modal';
+import Auth from 'components/common/molecules/Auth';
+import Modal from 'components/common/molecules/Modal';
 
 const Profile: FC = () => {
   const [{ isLoggedIn }] = useAuth();

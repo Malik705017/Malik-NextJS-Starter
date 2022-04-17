@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import classnames from 'classnames';
 
-import { useModal } from '../../../../models/modal';
+import { useModal } from 'models/modal';
 
-import Portal from '../../atoms/Portal';
-import Backdrop from '../../atoms/Backdrop';
-import Icon from '../../atoms/Icon';
+import Portal from 'components/common/atoms/Portal';
+import Backdrop from 'components/common/atoms/Backdrop';
+import Icon from 'components/common/atoms/Icon';
 
 import styles from './Modal.module.scss';
 

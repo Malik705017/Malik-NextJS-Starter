@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import classnames from 'classnames';
 
-import { useScroll } from '../../../../models/scroll';
-import { useAuth } from '../../../../models/auth';
-import { calcRemainingTime } from '../../../../utils/auth';
+import { useScroll } from 'models/scroll';
+import { useAuth } from 'models/auth';
+import { calcRemainingTime } from 'utils/auth';
 
-import Header from '../../molecules/Header';
-import Footer from '../../molecules/Footer';
+import Header from 'components/common/molecules/Header';
+import Footer from 'components/common/molecules/Footer';
 
 import styles from './Layout.module.scss';
 
