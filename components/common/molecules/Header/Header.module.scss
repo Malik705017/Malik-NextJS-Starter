@@ -6,7 +6,7 @@ $height-header-desktop: 60px;
 .header {
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
   justify-content: flex-end;
@@ -16,20 +16,20 @@ $height-header-desktop: 60px;
   width: 100%;
 
   background-color: black;
-  color: $green;
+  color: $blue;
   box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
-}
 
-.title {
-  margin: 0;
-  margin-left: 20px;
-  margin-right: auto;
-  font-weight: 500;
-  font-size: 20px;
-  cursor: pointer;
+  & > .title {
+    margin: 0;
+    margin-left: 20px;
+    margin-right: auto;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
 
-  @include mobile {
-    font-size: 24px;
+    @include mobile {
+      font-size: 24px;
+    }
   }
 }
 
@@ -40,6 +40,6 @@ $height-header-desktop: 60px;
   height: 32px;
 
   &:hover {
-    background-color: $green;
+    background-color: $blue;
   }
 }
