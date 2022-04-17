@@ -1,7 +1,7 @@
 import { FC, useMemo, useEffect, useState, useRef, ReactChild } from 'react';
 import classnames from 'classnames';
 
-import Button from '../../atoms/Button';
+import Button from 'components/common/atoms/Button';
 
 import styles from './Slider.module.scss';
 
@@ -75,7 +75,6 @@ const Slider: FC<SliderProps> = ({ childNodes, className = '', hidden = false })
         })}
       </ul>
       <Button
-        content="Prev"
         className={styles.prev}
         onClick={() => {
           if (direction === 'next') setDirection('prev');
@@ -87,9 +86,10 @@ const Slider: FC<SliderProps> = ({ childNodes, className = '', hidden = false })
             return newSlides;
           });
         }}
-      />
+      >
+        Prev
+      </Button>
       <Button
-        content="Next"
         className={styles.next}
         onClick={() => {
           if (direction === 'prev') setDirection('next');
@@ -101,7 +101,9 @@ const Slider: FC<SliderProps> = ({ childNodes, className = '', hidden = false })
             return newSlides;
           });
         }}
-      />
+      >
+        Next
+      </Button>
     </div>
   );
 };

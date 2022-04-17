@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 
-import modalReducer from './modal';
-import authReducer from './auth';
-import scrollReducer from './scroll';
+import modalReducer from 'models/modal';
+import authReducer from 'models/auth';
+import scrollReducer from 'models/scroll';
 
 /* https://redux-toolkit.js.org/api/configureStore  */
 const store = configureStore({

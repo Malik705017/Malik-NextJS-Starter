@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import styles from './Example.module.scss';
 
 type ExampleProps = {
-  className: string;
+  className?: string;
 };
 
 const Example: FC<ExampleProps> = ({ className = '' }) => {

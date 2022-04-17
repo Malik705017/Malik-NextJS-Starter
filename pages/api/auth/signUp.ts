@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { googleApiRoute } from '../../../utils/config/api.config';
+import { googleApiRoute } from 'utils/config/api.config';
 
 /* POST api/auth/signUp */
 const signUp = async (req: NextApiRequest, res: NextApiResponse) => {

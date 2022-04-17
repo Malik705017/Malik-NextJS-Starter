@@ -3,20 +3,33 @@ import classnames from 'classnames';
 
 import styles from './Button.module.scss';
 
+export enum ButtonSize {
+  small = 'small',
+  default = 'default',
+  large = 'large',
+}
+
 type ButtonProps = {
-  content?: ReactNode;
+  children?: ReactNode;
   className?: string;
   reverse?: boolean;
   onClick?: () => void;
+  size?: ButtonSize;
 };
 
-const Button: FC<ButtonProps> = ({ className = '', content = '', reverse = false, onClick = () => {} }) => {
+const Button: FC<ButtonProps> = ({
+  className = '',
+  children,
+  reverse = false,
+  onClick = () => {},
+  size = 'default',
+}) => {
   return (
     <button
-      className={classnames(!reverse ? styles.buttonOriginal : styles.buttonReverse, className)}
+      className={classnames(!reverse ? styles.buttonOriginal : styles.buttonReverse, styles[size], className)}
       onClick={onClick}
     >
-      {content}
+      {children}
     </button>
   );
 };

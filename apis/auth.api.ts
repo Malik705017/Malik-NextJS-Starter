@@ -1,4 +1,4 @@
-import { wrapFetch, apiRoute } from '../utils/config/api.config';
+import { wrapFetch, apiRoute } from 'utils/config/api.config';
 
 export type SignUpParamsType = {
   email: string;

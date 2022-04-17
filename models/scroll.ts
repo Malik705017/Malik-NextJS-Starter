@@ -1,6 +1,6 @@
 import { createSlice, ActionCreatorsMapObject } from '@reduxjs/toolkit';
-import { useRedux, Selector } from '../hooks/useRedux';
-import { RootState } from './store';
+import { useRedux, Selector } from 'hooks/useRedux';
+import { RootState } from 'models/store';
 
 interface ScrollState {
   canScroll: boolean;
