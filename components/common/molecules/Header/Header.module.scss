@@ -35,4 +35,11 @@ $height-header-desktop: 60px;
 
 .icon {
   margin-right: 20px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+
+  &:hover {
+    background-color: $green;
+  }
 }

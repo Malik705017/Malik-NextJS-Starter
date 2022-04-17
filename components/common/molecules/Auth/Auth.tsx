@@ -30,7 +30,7 @@ const Auth: FC<AuthProps> = () => {
 
   return (
     <div className={styles.auth}>
-      <h2>Malik's NextJS Starter</h2>
+      <h2>{"Malik's NextJS Starter"}</h2>
       <Input
         className={styles.input}
         value={email}
