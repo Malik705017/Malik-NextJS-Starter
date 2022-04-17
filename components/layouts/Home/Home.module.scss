@@ -59,8 +59,8 @@
     animation-delay: 1s;
     animation-duration: 2s;
 
-    & > span {
-      color: $green;
+    & > span.blue {
+      color: $blue;
     }
   }
 
@@ -87,20 +87,77 @@
   background-color: rgba($color: #000000, $alpha: 0.5);
 }
 
-.content {
-  height: calc(100vh - $height-header-desktop);
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
 @keyframes show {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+.featureSection {
+  background-color: $gray;
+
+  & > h1 {
+    font-size: 80px;
+
+    @include mobile {
+      font-size: 60px;
+    }
+  }
+
+  & > h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+
+    @include mobile {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  }
+
+  & > .content {
+    display: grid;
+    grid-gap: 60px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    justify-content: space-between;
+
+    @include tablet {
+      grid-gap: 40px;
+    }
+
+    & > .featureCard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      width: 100%;
+      height: 300px;
+      background-color: white;
+      color: black;
+
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      padding: 28px;
+
+      &:hover {
+        background-color: rgb(146, 146, 146);
+        color: white;
+        cursor: pointer;
+      }
+
+      & > h3 {
+        font-size: 24px;
+
+        @include tablet {
+          font-size: 20px;
+        }
+      }
+
+      & > .featureIcon {
+        margin-bottom: 14px;
+      }
+    }
   }
 }
