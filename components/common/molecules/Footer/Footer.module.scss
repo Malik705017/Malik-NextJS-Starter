@@ -1,5 +1,24 @@
+@import 'styles/variables.scss';
+
 .footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   height: 200px;
   width: 100%;
   background-color: black;
+  color: white;
+
+  & > .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+
+    & > a:not(:last-child) {
+      margin-right: 24px;
+    }
+  }
 }
