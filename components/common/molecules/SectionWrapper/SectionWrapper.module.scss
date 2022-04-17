@@ -10,11 +10,14 @@
   }
 
   @include mobile {
-    padding: 20px 32px;
+    padding: 40px 32px;
   }
 }
 
 .fullpage {
   height: calc(100vh - $height-header-desktop);
-  min-height: auto;
+
+  @include tablet {
+    height: auto;
+  }
 }

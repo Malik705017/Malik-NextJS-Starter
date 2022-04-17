@@ -14,30 +14,33 @@
 }
 
 .buttonOriginal {
-  @include button($green, black);
+  @include button($blue, black);
 }
 
 .buttonOriginal:hover {
   color: black;
-  background-color: $green;
+  background-color: $blue;
 }
 
 .buttonReverse {
-  @include button(black, $green);
+  @include button(black, $blue);
 }
 
 .buttonReverse:hover {
-  color: $green;
+  color: $blue;
   background-color: black;
 }
 
 .large {
-  height: 32px;
+  width: 180px;
+  height: 60px;
   border-radius: 8px;
+  font-size: 24px;
 }
 
 .default {
-  height: 24px;
+  width: 120px;
+  height: 40px;
   border-radius: 4px;
   font-size: 18px;
 }

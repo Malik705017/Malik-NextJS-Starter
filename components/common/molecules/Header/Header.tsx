@@ -15,7 +15,7 @@ const Header: FC = () => {
   const router = useRouter();
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <h1
         className={styles.title}
         onClick={() => {
@@ -35,7 +35,7 @@ const Header: FC = () => {
           onClick={() => openModal()}
         />
       )}
-    </div>
+    </header>
   );
 };
 
