@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-top: 30vh;
+  padding-top: 25vh;
 
   position: absolute;
   top: 0;
@@ -32,14 +32,19 @@
   & > h1 {
     color: white;
     width: 90%;
-    font-size: 90px;
+    font-size: 100px;
+    line-height: 1.2;
     margin: 0;
     animation: show forwards;
     animation-duration: 2s;
     opacity: 0;
 
+    @include tablet {
+      font-size: 70px;
+    }
+
     @include mobile {
-      font-size: 60px;
+      font-size: 44px;
     }
   }
 
@@ -47,7 +52,7 @@
     margin-bottom: 30px;
 
     @include mobile {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
     }
 
     animation: show forwards;

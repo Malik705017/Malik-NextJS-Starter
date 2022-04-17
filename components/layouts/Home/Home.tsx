@@ -1,15 +1,15 @@
 import { FC, useEffect } from 'react';
 import Image from 'next/image';
 
-import { useModal } from '../../../models/modal';
-import { useScroll } from '../../../models/scroll';
+import { useModal } from 'models/modal';
+import { useScroll } from 'models/scroll';
 
-import Head from '../../common/atoms/Head';
-import Button from '../../common/atoms/Button';
-import Modal from '../../common/molecules/Modal';
-import Auth from '../../common/molecules/Auth';
-import SectionWrapper from '../../common/molecules/SectionWrapper';
-import Carousel from '../../common/organisms/Carousel';
+import Head from 'components/common/atoms/Head';
+import Button from 'components/common/atoms/Button';
+import Modal from 'components/common/molecules/Modal';
+import Auth from 'components/common/molecules/Auth';
+import SectionWrapper from 'components/common/molecules/SectionWrapper';
+import Carousel from 'components/common/organisms/Carousel';
 
 import styles from './Home.module.scss';
 
@@ -52,15 +52,15 @@ const Home: FC = () => {
             <span>SUPER</span> FAST
           </h1>
           <Button
-            content="馬上開始"
-            reverse
             onClick={() => {
               enableScroll();
               if (canScroll) {
                 scrollToY();
               }
             }}
-          />
+          >
+            GET STARTED
+          </Button>
         </SectionWrapper>
         {/*背景遮罩，z-index = 1 */}
         <SectionWrapper className={styles.mask} />
