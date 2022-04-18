@@ -77,13 +77,21 @@ $height-header-desktop: 60px;
     right: 20px;
     z-index: 6;
     width: 300px;
-    height: 280px;
     border-radius: 4px;
     padding: 12px;
     box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
     background-color: $gray-dark;
     color: white;
     cursor: pointer;
+
+    @include mobile {
+      top: calc($height-header-desktop);
+      right: 0;
+      width: 100%;
+      border-radius: 0;
+      z-index: 4;
+      @include slideInFromTop(60px, 500ms);
+    }
 
     & > .user {
       display: flex;

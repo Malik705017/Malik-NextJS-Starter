@@ -72,7 +72,13 @@ const Header: FC = () => {
                 e.stopPropagation(); // 阻止事件繼續向上傳遞，若向上傳遞到 Layout 層就會把 dropdown 關掉
               }}
             >
-              <div className={styles.user}>
+              <div
+                className={styles.user}
+                onClick={() => {
+                  router.push(appRoute.profile);
+                  closeDropDown();
+                }}
+              >
                 <Icon className={styles.userHeadShot} src="/icons/user-white.icon.png" width={48} height={48} />
                 <div className={styles.userProfile}>
                   <h3>{userName}</h3>
