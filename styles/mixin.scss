@@ -19,3 +19,19 @@ $max-width-phone: 768px - 1px;
     @content;
   }
 }
+
+@mixin slideInFromTop($top, $duration) {
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      top: 0;
+    }
+    to {
+      opacity: 1;
+      top: $top;
+    }
+  }
+
+  animation-name: slideInFromTop;
+  animation-duration: $duration;
+}
