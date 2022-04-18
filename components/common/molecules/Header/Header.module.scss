@@ -1,15 +1,25 @@
 @import 'styles/mixin.scss';
 @import 'styles/variables.scss';
+@import 'components/common/molecules/NavBar/NavBar.module.scss';
 
 $height-header-desktop: 60px;
+
+@mixin userItem {
+  margin-right: 40px;
+  margin-left: auto;
+  cursor: pointer;
+  @include mobile {
+    margin: 0;
+  }
+}
 
 .header {
   position: fixed;
   top: 0;
-  z-index: 3;
+  z-index: 5;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
 
   height: $height-header-desktop;
@@ -19,27 +29,120 @@ $height-header-desktop: 60px;
   color: $blue;
   box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
 
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+  }
+
+  & > .navIcon {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
+  }
+
+  & > .navbar {
+    position: absolute;
+    top: $height-header-desktop;
+    left: 0;
+    z-index: 4;
+  }
+
   & > .title {
-    margin: 0;
-    margin-left: 20px;
-    margin-right: auto;
+    margin: 0 40px;
     font-weight: 500;
     font-size: 20px;
     cursor: pointer;
 
     @include mobile {
-      font-size: 24px;
+      margin: 0;
+      font-size: $fontsize-navbarItem;
     }
   }
-}
 
-.icon {
-  margin-right: 20px;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  & > .userName {
+    @include userItem;
+    font-size: $fontsize-navbarItem;
+  }
 
-  &:hover {
-    background-color: $blue;
+  & > .userDropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: calc($height-header-desktop - 10px);
+    right: 20px;
+    z-index: 6;
+    width: 300px;
+    height: 280px;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
+    background-color: $gray-dark;
+    color: white;
+    cursor: pointer;
+
+    & > .user {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 12px;
+      border-radius: 4px;
+
+      & > .userHeadShot {
+        margin-right: 20px;
+      }
+
+      & > h3 {
+        font-size: 18px;
+      }
+
+      & > p {
+        font-size: 14px;
+      }
+
+      &:hover {
+        background-color: $gray;
+      }
+    }
+
+    & > .borderLine {
+      width: calc(100% - 24px);
+      height: 1px;
+      color: $gray-light;
+      margin: 12px 0;
+    }
+
+    & > .userDropdownItem {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 18px;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      &:hover {
+        background-color: $gray;
+      }
+    }
+  }
+
+  & > .userIcon {
+    @include userItem;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      background-color: $blue;
+    }
   }
 }
