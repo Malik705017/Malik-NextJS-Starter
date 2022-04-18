@@ -1,8 +1,7 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 
 import { useModal } from 'models/modal';
-import { useScroll } from 'models/scroll';
 
 import Head from 'components/common/atoms/Head';
 import Button from 'components/common/atoms/Button';
@@ -18,23 +17,12 @@ const imgList = ['/images/home/banner_2.jpg', '/images/home/banner_3.jpg', '/ima
 
 const Home: FC = () => {
   const [{ isOpen: isModalOpen }] = useModal();
-  const [{ canScroll }, { enableScroll, disableScroll }] = useScroll();
 
   const scrollToY = () => {
     if (window) {
       window.scrollBy({ top: window.innerHeight - 60, behavior: 'smooth' });
     }
   };
-
-  useEffect(() => {
-    disableScroll();
-  }, []);
-
-  useEffect(() => {
-    if (canScroll) {
-      scrollToY();
-    }
-  }, [canScroll]);
 
   return (
     <>
@@ -56,16 +44,7 @@ const Home: FC = () => {
           <h1>
             <span className={styles.blue}>SUPER</span> FAST
           </h1>
-          <Button
-            onClick={() => {
-              enableScroll();
-              if (canScroll) {
-                scrollToY();
-              }
-            }}
-          >
-            GET STARTED
-          </Button>
+          <Button onClick={() => scrollToY()}>GET STARTED</Button>
         </SectionWrapper>
         {/*背景遮罩，z-index = 1 */}
         <SectionWrapper className={styles.mask} />

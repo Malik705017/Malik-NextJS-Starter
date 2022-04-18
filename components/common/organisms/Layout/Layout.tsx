@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react';
 import classnames from 'classnames';
 
-import { useScroll } from 'models/scroll';
 import { useAuth } from 'models/auth';
 import { useDropDown } from 'models/dropDown';
 import { calcRemainingTime } from 'utils/auth';
@@ -12,7 +11,6 @@ import Footer from 'components/common/molecules/Footer';
 import styles from './Layout.module.scss';
 
 const Layout: FC = ({ children }) => {
-  const [{ canScroll }] = useScroll();
   const [{ isLoggedIn }, { checkIsLoggedIn, logOut }] = useAuth();
   const [{ isOpen }, { closeDropDown }] = useDropDown();
 
@@ -35,7 +33,7 @@ const Layout: FC = ({ children }) => {
 
   return (
     <div
-      className={classnames(styles.layout, !canScroll && styles.locked)}
+      className={classnames(styles.layout)}
       onClick={(e) => {
         console.log('clickLayout');
         if (isOpen) {
