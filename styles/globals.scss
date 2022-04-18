@@ -70,3 +70,8 @@ a {
 *:focus {
   outline: none;
 }
+
+/* 11. Remove blue highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
