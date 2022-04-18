@@ -17,7 +17,7 @@ type AuthState = 'signUp' | 'signIn';
 const Auth: FC<AuthProps> = () => {
   const [{ email, password, isLoggedIn }, { signUp, signIn, changeInput }] = useAuth();
   const [{ isOpen }, { closeModal }] = useModal();
-  const [authState, setAuthState] = useState<AuthState>('signUp');
+  const [authState, setAuthState] = useState<AuthState>('signIn');
   const router = useRouter();
 
   useEffect(() => {
