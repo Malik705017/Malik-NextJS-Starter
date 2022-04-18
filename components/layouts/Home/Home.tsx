@@ -38,7 +38,11 @@ const Home: FC = () => {
 
   return (
     <>
-      <Head title="Malik's NextJS Starter" description={'Make your project better'} />
+      <Head
+        title="Malik's NextJS Starter"
+        description={'Make your project eaiser to start'}
+        og_image={'/images/common/og-image.jpg'}
+      />
       <div className={styles.banner}>
         <Carousel
           className={styles.carousel}
