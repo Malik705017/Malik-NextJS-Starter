@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 import modalReducer from 'models/modal';
 import authReducer from 'models/auth';
 import scrollReducer from 'models/scroll';
+import dropDownReducer from 'models/dropDown';
 
 /* https://redux-toolkit.js.org/api/configureStore  */
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     modal: modalReducer,
     auth: authReducer,
     scroll: scrollReducer,
+    dropDown: dropDownReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

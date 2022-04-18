@@ -3,6 +3,7 @@ import classnames from 'classnames';
 
 import { useScroll } from 'models/scroll';
 import { useAuth } from 'models/auth';
+import { useDropDown } from 'models/dropDown';
 import { calcRemainingTime } from 'utils/auth';
 
 import Header from 'components/common/molecules/Header';
@@ -13,6 +14,7 @@ import styles from './Layout.module.scss';
 const Layout: FC = ({ children }) => {
   const [{ canScroll }] = useScroll();
   const [{ isLoggedIn }, { checkIsLoggedIn, logOut }] = useAuth();
+  const [{ isOpen }, { closeDropDown }] = useDropDown();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -32,7 +34,16 @@ const Layout: FC = ({ children }) => {
   }, [isLoggedIn]);
 
   return (
-    <div className={classnames(styles.layout, !canScroll && styles.locked)}>
+    <div
+      className={classnames(styles.layout, !canScroll && styles.locked)}
+      onClick={(e) => {
+        console.log('clickLayout');
+        if (isOpen) {
+          closeDropDown();
+        }
+        e.stopPropagation();
+      }}
+    >
       <Header />
       <main>{children}</main>
       <Footer />
