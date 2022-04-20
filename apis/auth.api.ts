@@ -29,6 +29,7 @@ export type SignInDataType = {
   expiresIn: number;
   localId: string;
   registered: boolean;
+  userName: string;
 };
 
 export const signIn = async ({ email, password }: SignInParamsType) => {
@@ -37,5 +38,5 @@ export const signIn = async ({ email, password }: SignInParamsType) => {
     password,
   });
 
-  return data;
+  return typeof data === 'string' ? data : { ...data, userName: email.split('@')[0] };
 };

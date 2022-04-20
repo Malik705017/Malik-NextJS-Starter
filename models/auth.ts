@@ -8,6 +8,7 @@ interface AuthState {
   token: string;
   isLoggedIn: boolean;
   fetchStatus: status;
+  userName: string;
   email: string;
   password: string;
   error: string;
@@ -17,6 +18,7 @@ const initialState: AuthState = {
   token: '',
   isLoggedIn: false,
   fetchStatus: status.idle,
+  userName: '',
   email: '',
   password: '',
   error: '',
@@ -49,6 +51,7 @@ const signIn = createAsyncThunk<SignInDataType | string, void, { state: RootStat
       localStorage.setItem('idToken', data.idToken);
       const expiredTime = new Date().getTime() + data.expiresIn * 1000;
       localStorage.setItem('expiredTime', expiredTime.toString());
+      localStorage.setItem('userName', data.userName);
     }
 
     return data;
@@ -69,8 +72,10 @@ const authSlice = createSlice({
     },
     checkIsLoggedIn(state) {
       const token = localStorage.getItem('idToken');
-      if (token) {
+      const userName = localStorage.getItem('userName');
+      if (token && userName) {
         state.isLoggedIn = true;
+        state.userName = userName;
       }
     },
     logOut(state) {
@@ -78,6 +83,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.removeItem('idToken');
       localStorage.removeItem('expiredTime');
+      localStorage.removeItem('userName');
     },
   },
   extraReducers: (builder) => {
@@ -109,6 +115,7 @@ const authSlice = createSlice({
           state.fetchStatus = status.idle;
           state.token = action.payload.idToken;
           state.isLoggedIn = true;
+          state.userName = action.payload.userName;
         }
       });
   },

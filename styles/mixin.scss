@@ -1,4 +1,4 @@
-$max-width-laptop: 1960px - 1px;
+$max-width-laptop: 1920px - 1px;
 $max-width-tablet: 1440px - 1px;
 $max-width-phone: 768px - 1px;
 
@@ -18,4 +18,20 @@ $max-width-phone: 768px - 1px;
   @media (max-width: $max-width-phone) {
     @content;
   }
+}
+
+@mixin slideInFromTop($top, $duration) {
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      top: 0;
+    }
+    to {
+      opacity: 1;
+      top: $top;
+    }
+  }
+
+  animation-name: slideInFromTop;
+  animation-duration: $duration;
 }

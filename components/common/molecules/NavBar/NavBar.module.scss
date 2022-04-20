@@ -1,0 +1,45 @@
+@import 'styles/mixin.scss';
+@import 'styles/variables.scss';
+
+$fontsize-navbarItem: 18px;
+
+@mixin navItem {
+  color: white;
+  font-size: $fontsize-navbarItem;
+
+  &:hover {
+    cursor: pointer;
+    color: $blue;
+  }
+}
+
+.mobile {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  @include mobile {
+    display: block;
+    width: 100%;
+    padding: 8px 20px;
+  }
+
+  @include slideInFromTop(60px, 1000ms);
+
+  & span {
+    @include navItem;
+    display: block;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+}
+
+.laptop {
+  @include mobile {
+    display: none;
+  }
+
+  & span {
+    @include navItem;
+    margin-right: 40px;
+  }
+}

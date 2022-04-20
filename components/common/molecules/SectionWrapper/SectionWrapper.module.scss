@@ -3,7 +3,11 @@
 
 .sectionWrapper {
   width: 100%;
-  padding: 60px 100px;
+  padding: 60px 200px;
+
+  @include laptop {
+    padding: 60px 100px;
+  }
 
   @include tablet {
     padding: 40px 60px;
