@@ -23,7 +23,7 @@ $fontsize-navbarItem: 18px;
     padding: 8px 20px;
   }
 
-  @include slideInFromTop(60px, 1000ms);
+  @include slideInFromTop(60px, 500ms);
 
   & span {
     @include navItem;

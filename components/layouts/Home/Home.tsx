@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { useModal } from 'models/modal';
+import { useUIEffect } from 'models/uiEffect';
 
 import Head from 'components/common/atoms/Head';
 import Button from 'components/common/atoms/Button';
@@ -16,7 +16,7 @@ import styles from './Home.module.scss';
 const imgList = ['/images/home/banner_2.jpg', '/images/home/banner_3.jpg', '/images/home/banner_1.jpg'];
 
 const Home: FC = () => {
-  const [{ isOpen: isModalOpen }] = useModal();
+  const [{ modal }] = useUIEffect();
 
   const scrollToY = () => {
     if (window) {
@@ -76,8 +76,8 @@ const Home: FC = () => {
           </div>
         </div>
       </SectionWrapper>
-      {isModalOpen && (
-        <Modal>
+      {modal.isOpen && (
+        <Modal className={styles.modal}>
           <Auth />
         </Modal>
       )}

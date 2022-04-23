@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classnames from 'classnames';
 
-import { useModal } from 'models/modal';
+import { useUIEffect } from 'models/uiEffect';
 
 import Portal from 'components/common/atoms/Portal';
 import Backdrop from 'components/common/atoms/Backdrop';
@@ -14,15 +14,20 @@ type ModalProps = {
 };
 
 const Modal: FC<ModalProps> = ({ children: ModalContent, className }) => {
-  const [, { closeModal }] = useModal();
+  const [, { changeUIEffect }] = useUIEffect();
   return (
     <>
       <Portal>
-        <Backdrop onClick={() => closeModal()} />
+        <Backdrop onClick={() => changeUIEffect({ uiKey: 'modal', value: false })} />
       </Portal>
       <Portal>
         <div className={classnames(styles.modal, className)}>
-          <Icon className={styles.icon} src="/icons/close.icon.png" alt="closeIcon" onClick={() => closeModal()} />
+          <Icon
+            className={styles.icon}
+            src="/icons/close.icon.png"
+            alt="closeIcon"
+            onClick={() => changeUIEffect({ uiKey: 'modal', value: false })}
+          />
           {ModalContent}
         </div>
       </Portal>

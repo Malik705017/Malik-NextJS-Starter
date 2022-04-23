@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import classnames from 'classnames';
 
 import { useAuth } from 'models/auth';
-import { useDropDown } from 'models/dropDown';
+import { useUIEffect } from 'models/uiEffect';
 import { calcRemainingTime } from 'utils/auth';
 
 import Header from 'components/common/molecules/Header';
@@ -11,12 +11,12 @@ import Footer from 'components/common/molecules/Footer';
 import styles from './Layout.module.scss';
 
 const Layout: FC = ({ children }) => {
-  const [{ isLoggedIn }, { checkIsLoggedIn, logOut }] = useAuth();
-  const [{ isOpen }, { closeDropDown }] = useDropDown();
+  const [{ isSignIn }, { checkIsSignIn, logOut }] = useAuth();
+  const [{ dropDown }, { changeUIEffect }] = useUIEffect();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      checkIsLoggedIn();
+    if (!isSignIn) {
+      checkIsSignIn();
     } else {
       /* set up auto login */
       const expiredTime = localStorage.getItem('expiredTime');
@@ -29,15 +29,14 @@ const Layout: FC = ({ children }) => {
         return () => clearTimeout(timer);
       }
     }
-  }, [isLoggedIn]);
+  }, [isSignIn]);
 
   return (
     <div
       className={classnames(styles.layout)}
       onClick={(e) => {
-        console.log('clickLayout');
-        if (isOpen) {
-          closeDropDown();
+        if (dropDown.isOpen) {
+          changeUIEffect({ uiKey: 'dropDown', value: false });
         }
         e.stopPropagation();
       }}
