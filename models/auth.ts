@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, ActionCreatorsMapObject, PayloadAction } from '@reduxjs/toolkit';
+import { signWithThirdParty, ThirdParty } from 'firebaseConfig/firebaseAuth';
 import { useRedux, Selector, DefaultActionMap } from 'hooks/useRedux';
 import { RootState } from 'models/store';
 import { status } from 'utils/status';
@@ -6,9 +7,11 @@ import { signUp as signUpFunc, signIn as signInFunc, SignUpDataType, SignInDataT
 
 interface AuthState {
   token: string;
-  isLoggedIn: boolean;
+  isSignIn: boolean;
+  isSignUp: boolean;
   fetchStatus: status;
   userName: string;
+  userPhoto: string;
   email: string;
   password: string;
   error: string;
@@ -16,9 +19,11 @@ interface AuthState {
 
 const initialState: AuthState = {
   token: '',
-  isLoggedIn: false,
+  isSignIn: false,
+  isSignUp: false,
   fetchStatus: status.idle,
   userName: '',
+  userPhoto: '',
   email: '',
   password: '',
   error: '',
@@ -49,7 +54,7 @@ const signIn = createAsyncThunk<SignInDataType | string, void, { state: RootStat
     /* signIn success */
     if (typeof data !== 'string') {
       localStorage.setItem('idToken', data.idToken);
-      const expiredTime = new Date().getTime() + data.expiresIn * 1000;
+      const expiredTime = new Date().getTime() + +data.expiresIn * 1000;
       localStorage.setItem('expiredTime', expiredTime.toString());
       localStorage.setItem('userName', data.userName);
     }
@@ -58,9 +63,45 @@ const signIn = createAsyncThunk<SignInDataType | string, void, { state: RootStat
   }
 );
 
+type SignInWithThirdPartyReturnType =
+  | (Pick<SignInDataType, 'idToken' | 'refreshToken' | 'userName'> & { userPhoto: string })
+  | string;
+
+const signInWithThirdParty = createAsyncThunk<SignInWithThirdPartyReturnType, ThirdParty, { state: RootState }>(
+  'auth/signInWithThirdParty',
+  async (thirdParty: ThirdParty) => {
+    const response = await signWithThirdParty(thirdParty);
+
+    // signIn failed
+    if (typeof response === 'string') {
+      return response;
+    }
+
+    // signIn success
+    const user = response;
+    const idToken = await user.getIdToken();
+    const expiredTime = new Date().getTime() + 3600 * 1000; // expiredIn = 1 hour
+
+    localStorage.setItem('idToken', idToken);
+    localStorage.setItem('expiredTime', expiredTime.toString());
+    localStorage.setItem('userName', user.displayName!);
+    localStorage.setItem('userPhoto', user.photoURL!);
+
+    const data = {
+      idToken,
+      refreshToken: user.refreshToken,
+      userName: user.displayName!,
+      userPhoto: user.photoURL!,
+    };
+
+    return data;
+  }
+);
+
 const thunks = {
   signUp,
   signIn,
+  signInWithThirdParty,
 };
 
 const authSlice = createSlice({
@@ -70,20 +111,25 @@ const authSlice = createSlice({
     changeInput(state, action: PayloadAction<{ type: 'email' | 'password'; value: string }>) {
       state[action.payload.type] = action.payload.value;
     },
-    checkIsLoggedIn(state) {
+    checkIsSignIn(state) {
       const token = localStorage.getItem('idToken');
       const userName = localStorage.getItem('userName');
+      const userPhoto = localStorage.getItem('userPhoto');
       if (token && userName) {
-        state.isLoggedIn = true;
+        state.isSignIn = true;
         state.userName = userName;
+        state.token = token;
+
+        if (userPhoto) state.userPhoto = userPhoto;
       }
     },
     logOut(state) {
       state.token = '';
-      state.isLoggedIn = false;
+      state.isSignIn = false;
       localStorage.removeItem('idToken');
       localStorage.removeItem('expiredTime');
       localStorage.removeItem('userName');
+      localStorage.removeItem('userPhoto');
     },
   },
   extraReducers: (builder) => {
@@ -99,10 +145,11 @@ const authSlice = createSlice({
           state.password = '';
         } else {
           state.fetchStatus = status.idle;
-          state.token = action.payload.idToken;
+          state.isSignUp = true;
         }
       })
       .addCase(signIn.pending, (state) => {
+        state.isSignUp = false;
         state.fetchStatus = status.loading;
       })
       .addCase(signIn.fulfilled, (state, action) => {
@@ -114,8 +161,26 @@ const authSlice = createSlice({
         } else {
           state.fetchStatus = status.idle;
           state.token = action.payload.idToken;
-          state.isLoggedIn = true;
+          state.isSignIn = true;
           state.userName = action.payload.userName;
+        }
+      })
+      .addCase(signInWithThirdParty.pending, (state) => {
+        state.isSignUp = false;
+        state.fetchStatus = status.loading;
+      })
+      .addCase(signInWithThirdParty.fulfilled, (state, action) => {
+        if (typeof action.payload === 'string') {
+          state.fetchStatus = status.error;
+          state.error = action.payload;
+          state.email = '';
+          state.password = '';
+        } else {
+          state.fetchStatus = status.idle;
+          state.token = action.payload.idToken;
+          state.isSignIn = true;
+          state.userName = action.payload.userName;
+          state.userPhoto = action.payload.userPhoto;
         }
       });
   },

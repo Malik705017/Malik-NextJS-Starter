@@ -1,8 +1,7 @@
 import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { useModal } from 'models/modal';
-import { useDropDown } from 'models/dropDown';
+import { useUIEffect } from 'models/uiEffect';
 import { useAuth } from 'models/auth';
 import { appRoute } from 'utils/config/appRoute.config';
 
@@ -14,16 +13,15 @@ import Backdrop from 'components/common/atoms/Backdrop';
 import styles from './Header.module.scss';
 
 const navData = [
-  { link: '', name: 'Docs' },
-  { link: '', name: 'Blog' },
-  { link: '', name: 'Contact' },
-  { link: '', name: 'About' },
+  { link: '/', name: 'Docs' },
+  { link: '/', name: 'Blog' },
+  { link: '/', name: 'Contact' },
+  { link: '/', name: 'About' },
 ];
 
 const Header: FC = () => {
-  const [, { openModal }] = useModal();
-  const [{ isOpen }, { openDropDown, closeDropDown }] = useDropDown();
-  const [{ userName, isLoggedIn }, { logOut }] = useAuth();
+  const [{ dropDown }, { changeUIEffect }] = useUIEffect();
+  const [{ userName, userPhoto, isSignIn }, { logOut }] = useAuth();
   const router = useRouter();
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
 
@@ -54,18 +52,18 @@ const Header: FC = () => {
         {"Malik's NextJS Starter"}
       </h1>
       <NavBar data={navData} />
-      {isLoggedIn ? (
+      {isSignIn ? (
         <>
           <span
             className={styles.userName}
             onClick={() => {
-              if (isOpen) closeDropDown();
-              openDropDown();
+              if (dropDown.isOpen) changeUIEffect({ uiKey: 'dropDown', value: false });
+              changeUIEffect({ uiKey: 'dropDown', value: true });
             }}
           >
             {userName}
           </span>
-          {isOpen && (
+          {dropDown.isOpen && (
             <div
               className={styles.userDropdown}
               onClick={(e) => {
@@ -76,10 +74,15 @@ const Header: FC = () => {
                 className={styles.user}
                 onClick={() => {
                   router.push(appRoute.profile);
-                  closeDropDown();
+                  changeUIEffect({ uiKey: 'dropDown', value: false });
                 }}
               >
-                <Icon className={styles.userHeadShot} src="/icons/user-white.icon.png" width={48} height={48} />
+                <Icon
+                  className={styles.userHeadShot}
+                  src={userPhoto || '/icons/user-white.icon.png'}
+                  width={48}
+                  height={48}
+                />
                 <div className={styles.userProfile}>
                   <h3>{userName}</h3>
                   <p>See my profile</p>
@@ -97,11 +100,11 @@ const Header: FC = () => {
       ) : (
         <Icon
           className={styles.userIcon}
-          src="/icons/user-white.icon.png"
+          src={'/icons/user-white.icon.png'}
           alt="userIcon"
           width={32}
           height={32}
-          onClick={() => openModal()}
+          onClick={() => changeUIEffect({ uiKey: 'modal', value: true })}
         />
       )}
     </header>

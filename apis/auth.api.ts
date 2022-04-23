@@ -8,7 +8,7 @@ export type SignUpParamsType = {
 export type SignUpDataType = {
   idToken: string;
   refreshToken: string;
-  expiresIn: number;
+  expiresIn: string;
   localId: string;
 };
 
@@ -26,7 +26,7 @@ export type SignInParamsType = SignUpParamsType;
 export type SignInDataType = {
   idToken: string;
   refreshToken: string;
-  expiresIn: number;
+  expiresIn: string;
   localId: string;
   registered: boolean;
   userName: string;

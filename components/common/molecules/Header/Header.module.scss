@@ -102,6 +102,10 @@ $height-header-desktop: 60px;
 
       & > .userHeadShot {
         margin-right: 20px;
+
+        & img {
+          border-radius: 50%;
+        }
       }
 
       & > h3 {
