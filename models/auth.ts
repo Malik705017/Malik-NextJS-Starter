@@ -29,9 +29,11 @@ const initialState: AuthState = {
   error: '',
 };
 
-/* createAsyncThunk<ReturnedType, params, thunkAPIType> */
+/* createAsyncThunk<ReturnedType, params, thunkAPIType> 
+https://redux-toolkit.js.org/api/createAsyncThunk */
 const signUp = createAsyncThunk<SignUpDataType | string, void, { state: RootState }>(
   'auth/signUp',
+  // 下方函式稱作 payloadCreator，吃兩個參數：arg & thunkAPI，前者是你的 action function 的參數，只能有一個，比方說一個 id number 或一個 object，後者是提供 dispatch 和 getState 的 thunkAPI
   async (_, thunkAPI) => {
     const {
       auth: { email, password },
