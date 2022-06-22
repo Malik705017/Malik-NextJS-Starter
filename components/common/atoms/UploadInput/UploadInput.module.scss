@@ -1,0 +1,18 @@
+.uploadInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  width: fit-content;
+  height: 100px;
+  box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.label {
+  margin-right: 14px;
+}
+
+.input {
+  display: none;
+}

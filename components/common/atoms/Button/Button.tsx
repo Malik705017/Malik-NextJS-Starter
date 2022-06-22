@@ -15,6 +15,8 @@ type ButtonProps = {
   reverse?: boolean;
   onClick?: () => void;
   size?: ButtonSize;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -23,11 +25,15 @@ const Button: FC<ButtonProps> = ({
   reverse = false,
   onClick = () => {},
   size = 'default',
+  type = 'button',
+  disabled = false,
 }) => {
   return (
     <button
+      type={type}
       className={classnames(!reverse ? styles.buttonOriginal : styles.buttonReverse, styles[size], className)}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

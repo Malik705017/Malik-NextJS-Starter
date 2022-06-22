@@ -1,0 +1,12 @@
+@import 'styles/mixin.scss';
+@import 'styles/variables.scss';
+
+.productDetailForm {
+  & p {
+    margin-bottom: 20px;
+  }
+
+  & .textArea {
+    width: 100%;
+  }
+}

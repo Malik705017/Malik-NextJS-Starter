@@ -31,13 +31,16 @@ const ThirdPartyProvider = (thirdParty: ThirdParty) => {
 };
 
 export const signWithThirdParty = async (thirdParty: ThirdParty) => {
-  const provider = ThirdPartyProvider(thirdParty);
+  try {
+    const provider = ThirdPartyProvider(thirdParty);
 
-  const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
 
-  if (!result) return 'sign in falied';
-
-  // This is the signed-in user
-  const user = result.user;
-  return user;
+    // This is the signed-in user
+    const user = result.user;
+    return user;
+  } catch (error) {
+    if (error instanceof Error) return error.message;
+    return 'something went wrong';
+  }
 };

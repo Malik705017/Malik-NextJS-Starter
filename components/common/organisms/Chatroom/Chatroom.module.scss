@@ -1,0 +1,108 @@
+@import 'styles/mixin.scss';
+@import 'styles/variables.scss';
+
+@mixin header {
+  width: 300px;
+  height: 40px;
+  background-color: $gray-dark;
+}
+
+@mixin fixedContent {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 6;
+}
+
+@mixin borderTopRadius {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.chatroom {
+  @include fixedContent;
+  @include borderTopRadius;
+  width: 300px;
+  height: 500px;
+  box-shadow: 0 0 5px 0 black;
+  background-color: $gray;
+  color: white;
+
+  & > .headerOpen {
+    @include header;
+    @include borderTopRadius;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+    & > p {
+      cursor: pointer;
+    }
+
+    & > h1 {
+      font-size: 14px;
+    }
+  }
+
+  & > .chatbox {
+    padding: 24px;
+
+    & > .message {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 14px;
+
+      & > .sender {
+        display: flex;
+        align-items: center;
+        margin-right: 8px;
+      }
+
+      & > .content {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        color: black;
+        border-radius: 8px;
+        height: 24px;
+        min-width: 40px;
+        text-align: center;
+        padding: 4px;
+      }
+    }
+
+    & > .myMessage {
+      justify-content: flex-end;
+    }
+  }
+
+  & > .sendbox {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    padding: 0 8px;
+
+    & > .input {
+      width: 80%;
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    & > .button {
+      width: 20%;
+      height: 40px;
+    }
+  }
+}
+
+.headerClose {
+  @include fixedContent;
+  @include header;
+  @include borderTopRadius;
+  cursor: pointer;
+}

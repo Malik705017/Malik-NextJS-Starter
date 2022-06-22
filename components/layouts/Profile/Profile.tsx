@@ -3,14 +3,16 @@ import { FC, useEffect } from 'react';
 import { useAuth } from 'models/auth';
 import { useUIEffect } from 'models/uiEffect';
 
-import Auth from 'components/common/molecules/Auth';
-import Modal from 'components/common/molecules/Modal';
-
-import styles from './Profile.module.scss';
+// import styles from './Profile.module.scss';
 
 const Profile: FC = () => {
-  const [{ userName, isSignIn }] = useAuth();
-  const [{ modal }, { changeUIEffect }] = useUIEffect();
+  const [
+    {
+      user: { name },
+      authStatus: { isSignIn },
+    },
+  ] = useAuth();
+  const [, { changeUIEffect }] = useUIEffect();
 
   useEffect(() => {
     if (!isSignIn) {
@@ -18,16 +20,7 @@ const Profile: FC = () => {
     }
   }, [isSignIn]);
 
-  return (
-    <>
-      {isSignIn ? <p>Welcome {userName}</p> : <p>You need to sign in first</p>}
-      {modal.isOpen && (
-        <Modal className={styles.modal}>
-          <Auth />
-        </Modal>
-      )}
-    </>
-  );
+  return <>{isSignIn ? <p>Welcome {name}</p> : <p>You need to sign in first</p>}</>;
 };
 
 export default Profile;

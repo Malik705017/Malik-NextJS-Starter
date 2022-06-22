@@ -1,9 +1,7 @@
 import { FC, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 import { useAuth } from 'models/auth';
 import { useUIEffect } from 'models/uiEffect';
-import { appRoute } from 'utils/config/appRoute.config';
 import { ThirdParty } from 'firebaseConfig/firebaseAuth';
 
 import Button from 'components/common/atoms/Button';
@@ -17,12 +15,21 @@ type AuthProps = {};
 
 type AuthState = 'signUp' | 'signIn';
 
+const checkIsValid = (email: string, password: string) => {
+  if (!email.includes('@') || password.length < 6) return false;
+  return true;
+};
+
 const Auth: FC<AuthProps> = () => {
-  const [{ email, password, isSignIn, isSignUp, fetchStatus }, { signUp, signIn, signInWithThirdParty, changeInput }] =
-    useAuth();
+  const [
+    {
+      authInput: { emailInput, passwordInput },
+      authStatus: { isSignIn, isSignUp, fetchStatus },
+    },
+    { signUp, signIn, signInWithThirdParty, changeInput },
+  ] = useAuth();
   const [{ modal }, { changeUIEffect }] = useUIEffect();
   const [authState, setAuthState] = useState<AuthState>('signIn');
-  const router = useRouter();
 
   // 註冊成功後即轉為可登入狀態
   useEffect(() => {
@@ -35,8 +42,6 @@ const Auth: FC<AuthProps> = () => {
   useEffect(() => {
     if (isSignIn && modal.isOpen) {
       changeUIEffect({ uiKey: 'modal', value: false });
-      /* change to profile page */
-      router.push(appRoute.profile);
     }
   }, [isSignIn, modal.isOpen]);
 
@@ -49,16 +54,16 @@ const Auth: FC<AuthProps> = () => {
         <>
           <Input
             className={styles.input}
-            value={email}
+            value={emailInput}
             placeholder="email"
-            onChange={(e) => changeInput({ type: 'email', value: e.target.value })}
+            onChange={(e) => changeInput({ type: 'emailInput', value: e.target.value })}
           />
           <Input
             className={styles.input}
-            value={password}
+            value={passwordInput}
             type="password"
             placeholder="password"
-            onChange={(e) => changeInput({ type: 'password', value: e.target.value })}
+            onChange={(e) => changeInput({ type: 'passwordInput', value: e.target.value })}
           />
           {authState === 'signUp' && (
             <Button className={styles.signButton} onClick={signUp}>
@@ -66,7 +71,7 @@ const Auth: FC<AuthProps> = () => {
             </Button>
           )}
           {authState === 'signIn' && (
-            <Button className={styles.signButton} onClick={signIn}>
+            <Button className={styles.signButton} onClick={signIn} disabled={!checkIsValid(emailInput, passwordInput)}>
               登入
             </Button>
           )}
@@ -83,8 +88,8 @@ const Auth: FC<AuthProps> = () => {
               <p
                 className={styles.switchAction}
                 onClick={() => {
-                  changeInput({ type: 'email', value: '' });
-                  changeInput({ type: 'password', value: '' });
+                  changeInput({ type: 'emailInput', value: '' });
+                  changeInput({ type: 'passwordInput', value: '' });
                   setAuthState((prevState) => {
                     if (prevState === 'signUp') return 'signIn';
                     return 'signUp';

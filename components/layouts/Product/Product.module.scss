@@ -1,0 +1,40 @@
+@import 'styles/mixin.scss';
+@import 'styles/variables.scss';
+
+.productForm {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 40px;
+  border-radius: 4px;
+  box-shadow: 0 0.5px 5px 0 rgba(0, 0, 0, 0.2);
+
+  @include laptop {
+    max-width: 1080px;
+  }
+
+  @include mobile {
+    padding: 24px;
+  }
+
+  & h1 {
+    font-size: 32px;
+    color: $blue-dark;
+    margin: 0;
+  }
+}
+
+.subForm {
+  margin: 0px auto;
+  padding: 24px 0;
+  border-radius: 4px;
+}
+
+.line {
+  height: 5px;
+  box-shadow: 0 1px 2px -2px;
+  width: 100%;
+}
+
+.button {
+  margin: 20px auto 0 auto;
+}

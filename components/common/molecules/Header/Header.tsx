@@ -21,7 +21,13 @@ const navData = [
 
 const Header: FC = () => {
   const [{ dropDown }, { changeUIEffect }] = useUIEffect();
-  const [{ userName, userPhoto, isSignIn }, { logOut }] = useAuth();
+  const [
+    {
+      user: { name, photo },
+      authStatus: { isSignIn },
+    },
+    { logOut },
+  ] = useAuth();
   const router = useRouter();
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
 
@@ -49,7 +55,7 @@ const Header: FC = () => {
           router.push(appRoute.home);
         }}
       >
-        {"Malik's NextJS Starter"}
+        {'ElShop'}
       </h1>
       <NavBar data={navData} />
       {isSignIn ? (
@@ -61,7 +67,7 @@ const Header: FC = () => {
               changeUIEffect({ uiKey: 'dropDown', value: true });
             }}
           >
-            {userName}
+            {name}
           </span>
           {dropDown.isOpen && (
             <div
@@ -79,12 +85,12 @@ const Header: FC = () => {
               >
                 <Icon
                   className={styles.userHeadShot}
-                  src={userPhoto || '/icons/user-white.icon.png'}
+                  src={photo || '/icons/user-white.icon.png'}
                   width={48}
                   height={48}
                 />
                 <div className={styles.userProfile}>
-                  <h3>{userName}</h3>
+                  <h3>{name}</h3>
                   <p>See my profile</p>
                 </div>
               </div>

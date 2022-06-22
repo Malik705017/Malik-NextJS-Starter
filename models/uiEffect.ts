@@ -9,6 +9,9 @@ interface UIEffectState {
   modal: {
     isOpen: boolean;
   };
+  chatroom: {
+    isOpen: boolean;
+  };
 }
 
 const initialState: UIEffectState = {
@@ -16,6 +19,9 @@ const initialState: UIEffectState = {
     isOpen: false,
   },
   modal: {
+    isOpen: false,
+  },
+  chatroom: {
     isOpen: false,
   },
 };

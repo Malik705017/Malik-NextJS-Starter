@@ -1,15 +1,15 @@
 @import 'styles/mixin.scss';
 @import 'styles/variables.scss';
 
-.input {
-  height: 28px;
-  width: 80px;
+.textArea {
+  height: 200px;
+  width: 400px;
   border: 2px solid rgb(233, 233, 233);
   border-radius: 4px;
   padding: 4px;
 }
 
-.input:focus {
+.textArea:focus {
   border: 2px solid $blue-dark;
   background-color: $blue-light;
 }

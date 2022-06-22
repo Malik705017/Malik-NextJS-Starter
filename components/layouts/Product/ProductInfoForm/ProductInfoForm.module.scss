@@ -1,0 +1,32 @@
+@import 'styles/mixin.scss';
+@import 'styles/variables.scss';
+
+.inputRow {
+  display: flex;
+  margin: 10px 0;
+  height: 32px;
+
+  & p {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    min-width: max-content;
+
+    @include mobile {
+      font-size: 14px;
+    }
+  }
+
+  & input {
+    width: 120px;
+    height: 100%;
+  }
+
+  & > input.productTitle {
+    width: 400px;
+
+    @include mobile {
+      min-width: 180px;
+    }
+  }
+}

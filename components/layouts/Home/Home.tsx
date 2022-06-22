@@ -1,13 +1,9 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { useUIEffect } from 'models/uiEffect';
-
 import Head from 'components/common/atoms/Head';
 import Button from 'components/common/atoms/Button';
 import Icon from 'components/common/atoms/Icon';
-import Modal from 'components/common/molecules/Modal';
-import Auth from 'components/common/molecules/Auth';
 import SectionWrapper from 'components/common/molecules/SectionWrapper';
 import Carousel from 'components/common/organisms/Carousel';
 
@@ -16,8 +12,6 @@ import styles from './Home.module.scss';
 const imgList = ['/images/home/banner_2.jpg', '/images/home/banner_3.jpg', '/images/home/banner_1.jpg'];
 
 const Home: FC = () => {
-  const [{ modal }] = useUIEffect();
-
   const scrollToY = () => {
     if (window) {
       window.scrollBy({ top: window.innerHeight - 60, behavior: 'smooth' });
@@ -40,11 +34,11 @@ const Home: FC = () => {
         />
         {/*標語，z-index = 2 */}
         <SectionWrapper className={styles.slogan}>
-          <h1>BUILD YOUR WEBSITE</h1>
+          <h1>全台最大，專屬於</h1>
           <h1>
-            <span className={styles.blue}>SUPER</span> FAST
+            <span className={styles.blue}>艾爾之光</span>的交易平台
           </h1>
-          <Button onClick={() => scrollToY()}>GET STARTED</Button>
+          <Button onClick={() => scrollToY()}>馬上開始</Button>
         </SectionWrapper>
         {/*背景遮罩，z-index = 1 */}
         <SectionWrapper className={styles.mask} />
@@ -76,11 +70,6 @@ const Home: FC = () => {
           </div>
         </div>
       </SectionWrapper>
-      {modal.isOpen && (
-        <Modal className={styles.modal}>
-          <Auth />
-        </Modal>
-      )}
     </>
   );
 };
